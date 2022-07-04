@@ -1,0 +1,19 @@
+GET http://localhost:8000/
+
+###
+POST http://localhost:8000/auth/register
+Content-Type: application/json
+
+{
+    "email": "amirali@gmail.com",
+    "password": "amirali1234"
+}
+
+###
+POST http://localhost:8000/auth/login
+
+###
+POST http://localhost:8000/auth/refresh-token
+
+###
+DELETE http://localhost:8000/auth/logout
