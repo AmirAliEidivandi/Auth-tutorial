@@ -1,12 +1,12 @@
 GET http://localhost:8000/
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE2NTcwMTczNTksImV4cCI6MTY1NzAxNzM3OSwiYXVkIjoiNjJjM2ZhZWVmNGRhMDBlNjk4ZTM3YzhhIiwiaXNzIjoicGlja3VycGFnZS5jb20ifQ.6poNwhlAfRAbKGBllqfKt2PTvFzoiMDF5m3ZFBp0Snw
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE2NTcwMjAxNjcsImV4cCI6MTY1NzAyMDE4NywiYXVkIjoiNjJjM2ZhZWVmNGRhMDBlNjk4ZTM3YzhhIiwiaXNzIjoicGlja3VycGFnZS5jb20ifQ.0qRbkzPt4q7-CFIvI3MacmT9ulxL-cMVZHB1kJSwVok
 
 ###
 POST http://localhost:8000/auth/register
 Content-Type: application/json
 
 {
-    "email": "aaabbcc@gmail.com",
+    "email": "new@gmail.com",
     "password": "amirali1234"
 }
 
@@ -21,6 +21,11 @@ Content-Type: application/json
 
 ###
 POST http://localhost:8000/auth/refresh-token
+Content-Type: application/json
+
+{
+    "refreshToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE2NTcwMjAxMjYsImV4cCI6MTY4ODU3NzcyNiwiYXVkIjoiNjJjM2ZhZWVmNGRhMDBlNjk4ZTM3YzhhIiwiaXNzIjoicGlja3VycGFnZS5jb20ifQ.0G6Khe5zSN1D_H-NWn35D231NlTGhqdt7DAEfajlHOE"
+}
 
 ###
 DELETE http://localhost:8000/auth/logout

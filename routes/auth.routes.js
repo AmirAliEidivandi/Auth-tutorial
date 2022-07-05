@@ -2,7 +2,7 @@ const router = require("express").Router();
 const createError = require("http-errors");
 const User = require("../models/user.model");
 const { authSchema } = require("../helpers/validation_schema");
-const { signAccessToken } = require("../helpers/jwt_helper");
+const { signAccessToken, signRefreshToken, verifyRefreshToken } = require("../helpers/jwt_helper");
 
 router.post("/register", async (req, res, next) => {
     try {
@@ -16,8 +16,9 @@ router.post("/register", async (req, res, next) => {
         const user = new User(result);
         const savedUser = await user.save();
         const accessToken = await signAccessToken(savedUser.id);
+        const refreshToken = await signRefreshToken(savedUser.id);
 
-        res.status(201).json({ accessToken });
+        res.status(201).json({ accessToken, refreshToken });
     } catch (error) {
         if (error.isJoi) error.status = 422;
         next(error);
@@ -34,9 +35,10 @@ router.post("/login", async (req, res, next) => {
         const isMatch = await user.isValidPassword(result.password);
         if (!isMatch) throw createError.Unauthorized("Username/Password not valid");
 
-        const accessToken = await signAccessToken(user.id)
+        const accessToken = await signAccessToken(user.id);
+        const refreshToken = await signRefreshToken(user.id);
 
-        res.status(200).json({accessToken});
+        res.status(200).json({ accessToken, refreshToken });
     } catch (error) {
         if (error.isJoi) return next(createError.BadRequest("Invalid Username/Password"));
         next(error);
@@ -44,7 +46,17 @@ router.post("/login", async (req, res, next) => {
 });
 
 router.post("/refresh-token", async (req, res, next) => {
-    res.send("refresh token page");
+    try {
+        const { refreshToken } = req.body;
+        if (!refreshToken) throw createError.BadRequest();
+        const userId = await verifyRefreshToken(refreshToken);
+
+        const accessToken = await signAccessToken(userId);
+        const refToken = await signRefreshToken(userId);
+        res.status(200).json({accessToken: accessToken, refreshToken: refToken})
+    } catch (error) {
+        next(error);
+    }
 });
 
 router.delete("/logout", async (req, res, next) => {
