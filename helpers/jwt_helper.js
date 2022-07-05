@@ -13,7 +13,11 @@ module.exports = {
             };
 
             JWT.sign(payload, secret, option, (err, token) => {
-                if (err) return reject(err);
+                if (err) {
+                    console.log(err.message);
+                    // return reject(err);
+                    return reject(createError.InternalServerError());
+                }
                 resolve(token);
             });
         });
