@@ -53,14 +53,24 @@ router.post("/refresh-token", async (req, res, next) => {
 
         const accessToken = await signAccessToken(userId);
         const refToken = await signRefreshToken(userId);
-        res.status(200).json({accessToken: accessToken, refreshToken: refToken})
+        res.status(200).json({ accessToken: accessToken, refreshToken: refToken });
     } catch (error) {
         next(error);
     }
 });
 
 router.delete("/logout", async (req, res, next) => {
-    res.send("logout page");
+    try {
+        const { refreshToken } = req.body;
+        if (!refreshToken) throw createError.BadRequest();
+
+        const userId = await verifyRefreshToken(refreshToken);
+
+        const deleteUser = await User.findByIdAndDelete(userId);
+        res.status(204).json(deleteUser);
+    } catch (error) {
+        next(error);
+    }
 });
 
 module.exports = router;

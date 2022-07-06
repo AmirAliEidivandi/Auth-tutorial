@@ -1,12 +1,12 @@
 GET http://localhost:8000/
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE2NTcwMjAxNjcsImV4cCI6MTY1NzAyMDE4NywiYXVkIjoiNjJjM2ZhZWVmNGRhMDBlNjk4ZTM3YzhhIiwiaXNzIjoicGlja3VycGFnZS5jb20ifQ.0qRbkzPt4q7-CFIvI3MacmT9ulxL-cMVZHB1kJSwVok
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE2NTcxMDQ5NjQsImV4cCI6MTY1NzEwNDk4NCwiYXVkIjoiNjJjM2ZhZWVmNGRhMDBlNjk4ZTM3YzhhIiwiaXNzIjoicGlja3VycGFnZS5jb20ifQ.1_Vn5QBVNp1tiP9pHC0hYwENMcy-xNleZfl75FTwMfk
 
 ###
 POST http://localhost:8000/auth/register
 Content-Type: application/json
 
 {
-    "email": "new@gmail.com",
+    "email": "kadjfalkfdja@gmail.com",
     "password": "amirali1234"
 }
 
@@ -15,7 +15,7 @@ POST http://localhost:8000/auth/login
 Content-Type: application/json
 
 {
-    "email": "aaabbcc@gmail.com",
+    "email": "kadjfalkfdja@gmail.com",
     "password": "amirali1234"
 }
 
@@ -29,3 +29,8 @@ Content-Type: application/json
 
 ###
 DELETE http://localhost:8000/auth/logout
+Content-Type: application/json
+
+{
+    "refreshToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE2NTcxMDYwMjAsImV4cCI6MTY4ODY2MzYyMCwiYXVkIjoiNjJjNTZlNTdjN2M5ZDk5NGNkMzI0ZDg0IiwiaXNzIjoicGlja3VycGFnZS5jb20ifQ.My6qCdf9nKg09u4Go7EVSH6cNJK6PJxbtJKCGSLm49I"
+}
