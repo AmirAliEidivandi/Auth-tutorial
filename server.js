@@ -5,7 +5,7 @@ require("dotenv").config();
 const app = express();
 const authRouter = require("./routes/auth.routes");
 require("./helpers/init_mongodb");
-const { verifyAccessToken } = require('./helpers/jwt_helper');
+const { verifyAccessToken } = require("./helpers/jwt_helper");
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
